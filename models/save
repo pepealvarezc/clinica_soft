@@ -1,0 +1,49 @@
+    <?php if (isset($arr)) : ?>
+            <?php for ($i = 0; $i < count($arr); $i++) : ?>
+                <tr>
+                    <td>
+                        Nombre:
+                        <div>
+                            _____________________________________________
+                        </div>
+                    </td>
+                    <span style="font-weight: bold; margin-left: 5px;"><?php echo $arr[$i]['nombre_contacto'] ?></span>
+                    <td>
+                        Parentesco: <span
+                                style="font-weight: bold; margin-left: 5px;"><?php echo $arr[$i]['parentesco_cp'] ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tel: <span
+                                style="font-weight: bold; margin-left: 5px;"><?php echo $arr[$i]['telefono_cp'] ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Correo: <span
+                                style="font-weight: bold; margin-left: 5px;"><?php echo $arr[$i]['correo_cp'] ?></span>
+                    </td>
+                </tr>
+            <?php endfor; ?>
+        <?php endif; ?>
+
+
+
+                            <td>
+                                <div style="width: 100%;">
+                                    <table>
+                                        <tr>
+                                            <td style="font-size: 11px; text-align: right;">
+                                                <p style="text-align: right">Pag. 1</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 11px; text-align: right"">Jun 4, 2021 1:26:43 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 11px; text-align: right"">amarc</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>

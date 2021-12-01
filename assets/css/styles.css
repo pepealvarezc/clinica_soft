@@ -1,0 +1,164 @@
+label {
+    font-size: 12px;
+}
+
+/* =============== CONTAINER USER REGISTER =============== */
+.container-register-us {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-register-us {
+    height: 100%;
+    width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+    .card-register-us {
+        width: 100%;
+    }
+}
+
+.container-register-us .cd-sp {
+    margin-left: 1rem;
+}
+
+.status-active {
+    background: green;
+    width: 100%;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.status-inactive {
+    background: red;
+    width: 100%;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.card-body .container-asigns .paciente-asigns {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.fa-folder {
+    color: #e7c9a9;
+    font-size: 18px;
+}
+
+.card .title-table-sust {
+    font-size: 12px !important;
+}
+
+.modal .modal-body .none-inputs {
+    display: none;
+}
+
+.modal .modal-body .show-inputs {
+    display: block;
+}
+
+.field-duracion {
+    display: flex;
+}
+
+.field-duracion #cont-duracion {
+    margin-left: 5px;
+}
+
+.navbar-center {
+    position: absolute;
+    left: 15%;
+    transform: translatex(-50%);
+}
+
+.btn-save {
+    background: #3c8dbc !important;
+    color: #FFFFFF !important;
+}
+
+.btn-cns {
+    background: #ecf0f6 !important;
+}
+
+/* ===============            =============== */
+/* =============== EXPEDIENTE =============== */
+/* ===============            =============== */
+
+.c-view-of {
+    display: none;
+}
+
+.c-view-on {
+    display: block;
+}
+
+/* ===============  Elements  =============== */
+textarea {
+    white-space: pre-line;
+    resize: none !important;
+}
+
+/* icons venta */
+.icons-whatsapp-email{
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.fa-envelope-square  {
+    color:  #db4a39;
+}
+
+.fa-whatsapp-square {
+    color: #075e54;
+}
+
+#msn-cell {
+    display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+    #msn-cell {
+        display: none;
+    }
+}
+
+/* inputs validate */
+.validate-input {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23dc3545' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23dc3545' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center right calc(0.375em + 0.1875rem);
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.input-error {
+    display: block;
+}
+
+.input-true {
+    display: none;
+}
+
+.input__tel__true {
+    display: none;
+}
+
+.input__tel__error {
+    display: block;
+}
+
+#logo {
+    animation: girar infinite 15s linear;
+}
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+

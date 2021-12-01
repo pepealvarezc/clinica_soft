@@ -1,0 +1,2 @@
+backend: PHP MVC POO, MysQl 
+frond: JavaSscript vanilla, AJAX, JQUERY, CSS
