@@ -277,12 +277,82 @@ function sendDb(data) {
                 //Agregar a su contenedor
                 const containerButtons = document.querySelector('#container-buttons');
                 containerButtons.appendChild($button);
+            } else {
+                sweetAlert(response.message , 'error');
             }
+        } else {
+            sweetAlert('Se ha generado un error', 'error');
         }
     }
     xhr.send(data)
 }
+function listData() {
+    let data = JSON.parse(localStorage.getItem("db"));
+    document.querySelector('#contactosPaciente').innerHTML = "";
 
+    if (data) {
+        for (let i = 0; i < data.length; i++) {
+            let nombre = data[i].nombre;
+            let telefono = data[i].telefono;
+            let correo = data[i].correo;
+            let parentesco = data[i].parentesco;
+
+            const $tbody = document.querySelector('#contactosPaciente');
+            const $tr = document.createElement('tr');
+
+            const $tdNombre = document.createElement('td');
+            $tdNombre.setAttribute('class', 'nombre-cp');
+            $tdNombre.innerText = nombre;
+            $tr.appendChild($tdNombre);
+
+            const $tdTel = document.createElement('td');
+            $tdTel.setAttribute('class', 'tel-cp');
+            $tdTel.innerText = telefono;
+            $tr.appendChild($tdTel);
+
+            const $tdContacto = document.createElement('td');
+            $tdContacto.setAttribute('class', 'contacto-cp');
+            $tdContacto.innerText = correo;
+            $tr.appendChild($tdContacto);
+
+            const $tdParentesco = document.createElement('td');
+            $tdParentesco.setAttribute('class', 'parentesco-cp');
+            $tdParentesco.innerText = parentesco;
+            $tr.appendChild($tdParentesco);
+
+            //boton editar
+            const $tdButtonEdit = document.createElement('td');
+            const $buttonEdit = document.createElement('a');
+            $buttonEdit.setAttribute('type', 'button');
+            $buttonEdit.setAttribute('class', 'btn btn-primary btn-sm btn-flat b-edit');
+            $buttonEdit.setAttribute('data-id', `${i}`);
+            $buttonEdit.setAttribute('data-toggle', 'modal');
+            $buttonEdit.setAttribute('data-target', '#modalEdit');
+
+            const $iconEdit = document.createElement('i');
+            $iconEdit.setAttribute('class', 'fas fa-user-edit b-edit');
+            $iconEdit.setAttribute('data-id', `${i}`);
+            $buttonEdit.appendChild($iconEdit);
+            $tdButtonEdit.appendChild($buttonEdit);
+            $tr.appendChild($tdButtonEdit);
+
+            const $tdButtonDelete = document.createElement('td');
+            const $ButtonDelete = document.createElement('a');
+            $ButtonDelete.setAttribute('type', 'button');
+            $ButtonDelete.setAttribute('data-id', `${i}`);
+            $ButtonDelete.setAttribute('class', 'btn btn-danger btn-sm btn-flat b-delete');
+
+            const $iconDelete = document.createElement('i');
+            $iconDelete.setAttribute('class', 'far fa-trash-alt b-delete');
+            $iconDelete.setAttribute('data-id', `${i}`);
+            $ButtonDelete.appendChild($iconDelete);
+            $tdButtonDelete.appendChild($ButtonDelete);
+            $tr.appendChild($tdButtonDelete);
+
+            $tbody.appendChild($tr);
+        }
+    }
+}
 //se muestra el localstorage vacio
 listData();
 

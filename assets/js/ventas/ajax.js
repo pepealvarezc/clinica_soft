@@ -86,19 +86,20 @@ function readForm(e) {
 
     //Si confima la fecha de seguimiento vacia va poder ingresar la informacion
     if (razonLlamada === 'Prospecto' && fechaSeg === "") {
-        const confirmFechaSeg = confirm('Deseas ingresar fecha de seguimiento vacia');
+        const confirmFechaSeg = confirm('Deseas continuar con la fecha de seguimiento vacia?');
         if (confirmFechaSeg) {
-            if (action === 'create') {
-                sendDb(data);
-            } else {
-                const ventaId = document.querySelector('#ventaId').value;
-                data.append('ventaId', ventaId);
-                editDb(data);
-            }
+            createOrUpdate(data, action);
         } else {
             e.preventDefault();
         }
-    } else if (action === 'create') {
+        return;
+    } else {
+        createOrUpdate(data, action);
+    }
+}
+
+function createOrUpdate(data, action) {
+    if (action === 'create') {
         sendDb(data);
     } else {
         const ventaId = document.querySelector('#ventaId').value;

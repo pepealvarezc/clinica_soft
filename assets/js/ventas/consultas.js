@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         "ajax": {
             type: 'POST',
-            url: `${GLOBAL_URL}/venta/test`,
+            url: `${GLOBAL_URL}/venta/seguimiento`,
             mimeType: 'json',
             "dataSrc": ""
         },
@@ -166,8 +166,11 @@ function readClickTable(e) {
         xhr.onload = function () {
             if (xhr.status === 200) {
                 const obj = JSON.parse(xhr.responseText);
-                if (obj.res === 'true') {
+                if (obj.res === 'true' || obj.res) {
                     tableVentaRegistros.api().ajax.reload();
+                    sweetAlert('Seguimiento finalizado', 'success');
+                } else {
+                    sweetAlert(obj.message, 'error');
                 }
             }
         }

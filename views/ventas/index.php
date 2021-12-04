@@ -32,7 +32,7 @@
                     <i class="fas fa-barcode"></i> Nuevo prospecto
                 </a>
                 <a href="<?= base_url ?>venta/registros" class="btn btn-app bg-primary">
-                    <i class="fas fa-phone-volume"></i> Llamadas en seg
+                    <i class="fas fa-phone-volume"></i> Llamadas en seguimiento
                 </a>
                 <a class="btn btn-app bg-primary" href="<?= base_url ?>paciente/registro">
                     <i class="fas fa-plus"></i> Nuevo ingreso

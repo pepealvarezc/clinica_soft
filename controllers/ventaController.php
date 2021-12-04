@@ -146,26 +146,28 @@ class ventaController
         }
     }
 
-    public function test()
+    public function seguimiento()
     {
         $registros = new Venta();
         $arrData = $registros->getAllObj();
 
         for ($i = 0; $i < count($arrData); $i++) {
-
+            $disabled = false;
             if ($arrData[$i]['fecha_seguimiento'] == 0) {
+                $disabled = true;
                 $arrData[$i]['estado_ve'] = '<span class="badge badge-danger">Inactivo</span>';
             } else {
                 $arrData[$i]['estado_ve'] = '<span class="badge badge-success">Activo</span>';
             }
+
             $arrData[$i]['edit'] =
-                '<a href=http://localhost/clinica_soft/venta/editar&id=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-edit"></i></a>';
+                '<a href='.base_url.'venta/editar&id=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-edit"></i></a>';
             $arrData[$i]['nota'] =
-                '<a href=http://localhost/clinica_soft/venta/saveNota&id=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-file-alt"></i></a>';
+                '<a href='.base_url.'venta/saveNota&id=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-file-alt"></i></a>';
             $arrData[$i]['finalizar'] =
-                '<a data-id=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md finSeg btn-table"><i class="fas fa-hourglass-end finSeg" data-id=' . $arrData[$i]['id_venta'] . '></i></a>';
+                $disabled ? "" : '<a data-id=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md finSeg btn-table"><i class="fas fa-hourglass-end finSeg" data-id=' . $arrData[$i]['id_venta'] . '></i></a>';
             $arrData[$i]['ingreso'] =
-                '<a href=http://localhost/clinica_soft/paciente/registro&idv=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-user-plus"></i></a>';
+                '<a href='.base_url.'paciente/registro&idv=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-user-plus"></i></a>';
         }
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
         die();
@@ -178,7 +180,7 @@ class ventaController
 
         for ($i = 0; $i < count($arrData); $i++) {
             $arrData[$i]['detalle'] =
-                '<a href=http://localhost/clinica_soft/venta/detalleProspecto&idDp=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-user-plus"></i></a>';
+                '<a href='.base_url.'venta/detalleProspecto&idDp=' . $arrData[$i]['id_venta'] . ' class="btn bg-gradient-white btn-md btn-table"><i class="fas fa-user-tag"></i></a>';
         }
 
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);

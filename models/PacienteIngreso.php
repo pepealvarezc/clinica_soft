@@ -575,20 +575,18 @@ class PacienteIngreso
                                      )";
         $save = $this->db->query($sql);
 
-        var_dump($save);
-        echo $this->db->error;
-
         //$ventaId = empty($venta_id) ? $venta_id : false;
 
         if ($save) {
             return [
-                'res' => 'true',
+                'res' => true,
                 'paciente_id' => $paciente_id,
                 'ingreso_id' => $ingreso_id = $this->db->insert_id,
                 'entidad_id' => $entidad_id,
+                'message' => '',
             ];
         } else {
-            return ['res' => 'false'];
+            return ['res' => false, 'message' => $save];
         }
     }
 }

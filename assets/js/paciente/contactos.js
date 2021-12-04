@@ -161,6 +161,8 @@ function edit(e) {
             data[id].parentesco = document.querySelector('#parentescoEdit').value;
         localStorage.setItem("db", JSON.stringify(data));
         sweetAlert('Actualizado correctamente !', 'success');
+    } else {
+        sweetAlert('Se ha detectado un error!', 'error');
     }
     listData();
 }

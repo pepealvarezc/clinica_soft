@@ -2,6 +2,7 @@
 require_once '../models/PacienteIngreso.php';
 require_once '../models/ContactosPaciente.php';
 require_once '../config/db.php';
+date_default_timezone_set("America/Tijuana");
 if (isset($_GET['idI']) && isset($_GET['idP'])) {
     $paciente_id = $_GET['idP'] ? filter_var($_GET['idP'], FILTER_VALIDATE_INT) : false;
     $ingreso_id = $_GET['idI'] ? filter_var($_GET['idI'], FILTER_VALIDATE_INT) : false;
@@ -19,6 +20,7 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
     while ($d = $obj->fetch_assoc()) {
         $arr[] = $d;
     }
+    $todayDate = date('M d, Y h:i:s A');
 }
 ?>
 
@@ -103,12 +105,12 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Página. 1
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                "><?= $todayDate ?></td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
@@ -142,13 +144,11 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
 
     <p class="subtitles-b">II. Declara El Paciente</p>
     <p>
-        a) Ser una persona física de 41 años de edad, Soltero, nacido en leon , y que es su voluntad celebrar el
+        a) Ser una persona física de <?= $data->edad_pa ?> años de edad, <?= $data->estado_civil_ip ?>, nacido en <?= $data->lugar_nacimiento_ip ?> , y que es su voluntad celebrar el
         presente contrato y recibir los servicios profesionales de Clinica Nuevo Ser.
     <p>
         b) Que se encuentra representado por la persona que firma al calce, y que autoriza a Clinica Nuevo Ser a
-        iniciar el tratamiento por Alcoholismo, Drogadiccion, Ludopatia, Depresion, Transtorno alimenticio,
-        Transtorno
-        Mental aceptando en este acto que el paciente participe en todas y cada una de las actividades que se
+        iniciar el tratamiento por <?= $data->adicion_tratamiento ?> aceptando en este acto que el paciente participe en todas y cada una de las actividades que se
         consideren necesarias para su tratamiento, inclusive aquellas que se lleven a cabo fuera de las
         instalaciones.
     </p>
@@ -157,14 +157,14 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
     <p class="subtitle">CLAUSULAS</p>
     <p>
         1. El paciente, familiar responsable y/o el representante legal se obliga a pagar a Clinica Nuevo Ser como
-        contraprestación por los servicios profesionales recibidos la cantidad de: $ MXP ()
+        contraprestación por los servicios profesionales recibidos la cantidad de: $<?= $data->precio_tratamiento_ip ?> <?= $data->moneda_ip ?>
     <p>
-        2.- El tratamiento tendrá una duración de semanas.
+        2.- El tratamiento tendrá una duración de <?= $data->duracion_ip ?> semanas.
     </p>
-    3.- Al ingresar el paciente se deberá entregar la cantidad de $ MXP () cantidad que no será reembolsable si
+    3.- Al ingresar el paciente se deberá entregar la cantidad de $<?= $data->deposito_ip ?> <?= $data->moneda_ip ?> cantidad que no será reembolsable si
     el paciente por cualquier razón abandonara el tratamiento antes del tiempo estipulado.
     <p>
-        4.- El saldo pendiente por liquidar es de: $ MXP que deberá ser cubierto de la siguiente manera:
+        4.- El saldo pendiente por liquidar es de: $<?= (float)$data->precio_tratamiento_ip  - (float)$data->deposito_ip ?> <?= $data->moneda_ip ?> que deberá ser cubierto de la siguiente manera:
     </p>
     </p>
     <p>
@@ -207,12 +207,12 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Página. 2
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                "><?= $todayDate ?></td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
@@ -342,12 +342,12 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Página. 3
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                "><?= $todayDate ?></td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
@@ -457,12 +457,12 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Página. 4
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                "><?= $todayDate ?></td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
@@ -655,12 +655,12 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Página. 5
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                "><?= $todayDate ?></td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
@@ -703,12 +703,12 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Página. 6
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                "><?= $todayDate ?></td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
@@ -815,12 +815,12 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Página. 7
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"
-                                ">Jun 4, 2021 1:26:43 PM</td>
+                                "><?= $todayDate ?></td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right"

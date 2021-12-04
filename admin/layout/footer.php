@@ -17,7 +17,7 @@
 <!-- /.control-sidebar -->
 
 <!-- Main Footer -->
-<footer class="main-footer">
+<footer class="main-footer" style="margin-top: 13em">
   <!-- To the right -->
   <div class="float-right d-none d-sm-inline">
 

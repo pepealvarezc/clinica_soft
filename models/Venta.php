@@ -220,10 +220,17 @@ class Venta
 
     public function finalizarSeguimiento()
     {
-        $sql = "UPDATE venta SET estado_ve = 0, fecha_seguimiento = NULL WHERE id_venta = {$this->getId()}";
-        $res = $this->db->query($sql);
-        if ($res) {
-            return ['res' => 'true'];
+        $sql = "SELECT id_venta from venta where id_venta = {$this->getId()}";
+        $venta = $this->db->query($sql);
+
+        if ($venta->num_rows) {
+            $sql = "UPDATE venta SET estado_ve = 0, fecha_seguimiento = NULL WHERE id_venta = {$this->getId()}";
+            $res = $this->db->query($sql);
+            if ($res) {
+                return ['res' => 'true'];
+            }
+        } else {
+            return ['res' => false, 'message' => 'Seguimiento no encontrado para finalizar'];
         }
     }
 

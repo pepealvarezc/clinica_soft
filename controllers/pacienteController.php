@@ -84,10 +84,10 @@ class pacienteController
                 $contactos->setPacienteId($paciente_id);
                 $contactos->setIngresoId($ingreso_id);
                 $obj = $contactos->getAll();
+                $arr;
                 while ($d = $obj->fetch_assoc()) {
                     $arr[] = $d;
                 }
-                $arr;
             }
         }
         $entidad = new Entidad();
@@ -212,36 +212,44 @@ class pacienteController
                     $pacienteIngreso->setPacienteId($last_id);
                     $save = $pacienteIngreso->save();
 
-                    $ingreso_id = $save['ingreso_id'];
-
-                    //una vez cumplido el registro del paciente se
-                    // procede a restar el cupo de las entidades
-                    $id_ent = $save['entidad_id'];
-                    $entidad = new Entidad();
-                    $entidad->setIdEntidad($id_ent);
-                    $entidad->subtraction();
-
-                    //Se insertan los contactos del paciente
-                    $contacto = new ContactosPaciente();
-                    $arr = json_decode($_POST['arrData'], true);
-
-                    foreach ($arr as $row) {
-                        $contacto->setPacienteId($last_id);
-                        $contacto->setIngresoId($ingreso_id);
-                        $contacto->setNombreCp(filter_var($row['nombreCp'], FILTER_SANITIZE_STRING));
-                        $contacto->setTelefonoCp(filter_var($row['telCp'], FILTER_SANITIZE_STRING));
-                        $contacto->setCorreoCp(filter_var($row['correoCp'], FILTER_SANITIZE_STRING));
-                        $contacto->setParentescoCp(filter_var($row['parentescoCp'], FILTER_SANITIZE_STRING));
-                        $test = $contacto->save();
+                    if ($save['res']) {
+                        $ingreso_id = $save['ingreso_id'];
+    
+                        //una vez cumplido el registro del paciente se
+                        // procede a restar el cupo de las entidades
+                        $id_ent = $save['entidad_id'];
+                        $entidad = new Entidad();
+                        $entidad->setIdEntidad($id_ent);
+                        $entidad->subtraction();
+    
+                        //Se insertan los contactos del paciente
+                        $contacto = new ContactosPaciente();
+                        $arr = json_decode($_POST['arrData'], true);
+    
+                        foreach ($arr as $row) {
+                            $contacto->setPacienteId($last_id);
+                            $contacto->setIngresoId($ingreso_id);
+                            $contacto->setNombreCp(filter_var($row['nombreCp'], FILTER_SANITIZE_STRING));
+                            $contacto->setTelefonoCp(filter_var($row['telCp'], FILTER_SANITIZE_STRING));
+                            $contacto->setCorreoCp(filter_var($row['correoCp'], FILTER_SANITIZE_STRING));
+                            $contacto->setParentescoCp(filter_var($row['parentescoCp'], FILTER_SANITIZE_STRING));
+                            $test = $contacto->save();
+                        }
+    
+                        // Si existe el id de la venta y se crea un nuevo registro
+                        // del paciente se manda a llamar la funcion para finalizar el status
+                        if ($ventaId) {
+                            $status = new Venta();
+                            $status->setId($ventaId);
+                            $status->finalizarSeguimiento();
+                        }
+                    } else {
+                        $save = [
+                            'res' => false,
+                            'message' => 'Error en la petición'
+                        ];
                     }
 
-                    // Si existe el id de la venta y se crea un nuevo registro
-                    // del paciente se manda a llamar la funcion para finalizar el status
-                    if ($ventaId) {
-                        $status = new Venta();
-                        $status->setId($ventaId);
-                        $status->finalizarSeguimiento();
-                    }
                 }
             } else if ($_POST['action'] == 'reingreso') {
                 $pacienteIngreso->setId($usuaio_id);

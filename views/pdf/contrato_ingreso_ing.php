@@ -2,6 +2,7 @@
 require_once '../models/PacienteIngreso.php';
 require_once '../models/ContactosPaciente.php';
 require_once '../config/db.php';
+date_default_timezone_set("America/Tijuana");
 if (isset($_GET['idI']) && isset($_GET['idP'])) {
     $paciente_id = $_GET['idP'] ? filter_var($_GET['idP'], FILTER_VALIDATE_INT) : false;
     $ingreso_id = $_GET['idI'] ? filter_var($_GET['idI'], FILTER_VALIDATE_INT) : false;
@@ -15,10 +16,11 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
     $contactos->setPacienteId($paciente_id);
     $contactos->setIngresoId($ingreso_id);
     $obj = $contactos->getAll();
+    $arr = array();
     while ($d = $obj->fetch_assoc()) {
         $arr[] = $d;
     }
-    $arr;
+    $todayDate = date('M d, Y h:i:s A');
 }
 ?>
 
@@ -119,16 +121,13 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Page. 1
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right">
-                                    <?php
-                                    echo strftime("%A %d %B %Y");
-                                    echo '  ';
-                                    date_default_timezone_set('US/Pacific');
-                                    echo date('h:i:s a', time());
+                                    <?=
+                                        $todayDate
                                     ?>
                                 </td>
                             </tr>
@@ -192,7 +191,7 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
         </tr>
         <tr>
             <td class="padding-tr">
-                a) Being a person of 41 years old, Soltero, born in leon , and that is their will to enter into the
+                a) Being a person of <?= $data->edad_pa ?> years old, <?= $data->estado_civil_ip ?>, born in <?= $data->lugar_nacimiento_ip ?> , and that is their will to enter into the
                 present contract and receive professional
                 services Clinica Nuevo Ser.
             </td>
@@ -200,8 +199,7 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
         <tr>
             <td class="padding-tr">
                 b) Which is represented by the person signing below, and authorizesClinica Nuevo Ser to start the
-                primary treatment for Alcoholismo,
-                Drogadiccion, Ludopatia, Depresion, Transtorno alimenticio, Transtorno Mental hereby accepting the
+                primary treatment for <?= $data->adicion_tratamiento ?> hereby accepting the
                 patient to participate in each and
                 every one of the activities deemed necessary for rehabilitation, including those that take place outside
                 the premises.
@@ -214,25 +212,25 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
         </tr>
         <tr>
             <td class="padding-tr">
-                1. The patient is required to pay Clinica Nuevo Ser the amount of $ MXP. as compensation for the
+                1. The patient is required to pay Clinica Nuevo Ser the amount of $<?= $data->precio_tratamiento_ip ?> <?= $data->moneda_ip ?>. as compensation for the
                 professional services received.
             </td>
         </tr>
         <tr>
             <td class="padding-tr">
-                2.- The treatment fill have a duration of weeks
+                2.- The treatment fill have a duration of <?= $data->duracion_ip ?> weeks
             </td>
         </tr>
         <tr>
             <td class="padding-tr">
-                3.- Upon admission the patient will deliver the amount of $ MXP amount not refundable if the patient for
+                3.- Upon admission the patient will deliver the amount of $<?= $data->deposito_ip ?> <?= $data->moneda_ip ?> amount not refundable if the patient for
                 any reason abandon treatment
                 before the stipulated time.
             </td>
         </tr>
         <tr>
             <td class="padding-tr">
-                4.- The outstanding balance of: $ MXP that must be covered as follows:
+                4.- The outstanding balance of: <?= (float)$data->precio_tratamiento_ip  - (float)$data->deposito_ip ?> <?= $data->moneda_ip ?> that must be covered as follows:
             </td>
         </tr>
         <tr>
@@ -267,7 +265,7 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
         <tr>
             <td class="padding-tr">
                 8.- In the case of under age patients, it is authorized that Clinica Nuevo Ser A.C. to act as considered
-                necessary by the medical and
+                necessary by the medical and therapeutic staff.
             </td>
         </tr>
     </table>
@@ -277,7 +275,7 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
 <!-- PAGINA 2 !-->
 <page pageset='new' backtop="10mm" backbottom="10mm" backleft="" backright="">
     <page_header class="header">
-        <p>therapeutic staff.</p>
+        <p></p>
     </page_header>
 
     <page_footer>
@@ -316,16 +314,13 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Page 2
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right">
                                     <?php
-                                    echo strftime("%A %d %B %Y");
-                                    echo '  ';
-                                    date_default_timezone_set('US/Pacific');
-                                    echo date('h:i:s a', time());
+                                    $todayDate
                                     ?>
                                 </td>
                             </tr>
@@ -489,16 +484,13 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Page 3
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right">
                                     <?php
-                                    echo strftime("%A %d %B %Y");
-                                    echo '  ';
-                                    date_default_timezone_set('US/Pacific');
-                                    echo date('h:i:s a', time());
+                                    $todayDate
                                     ?>
                                 </td>
                             </tr>
@@ -634,16 +626,13 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Page 4
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right">
                                     <?php
-                                    echo strftime("%A %d %B %Y");
-                                    echo '  ';
-                                    date_default_timezone_set('US/Pacific');
-                                    echo date('h:i:s a', time());
+                                    $todayDate
                                     ?>
                                 </td>
                             </tr>
@@ -865,16 +854,13 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Page 5
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right">
                                     <?php
-                                    echo strftime("%A %d %B %Y");
-                                    echo '  ';
-                                    date_default_timezone_set('US/Pacific');
-                                    echo date('h:i:s a', time());
+                                    $todayDate
                                     ?>
                                 </td>
                             </tr>
@@ -929,16 +915,13 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Page 6
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right">
                                     <?php
-                                    echo strftime("%A %d %B %Y");
-                                    echo '  ';
-                                    date_default_timezone_set('US/Pacific');
-                                    echo date('h:i:s a', time());
+                                    $todayDate
                                     ?>
                                 </td>
                             </tr>
@@ -1049,16 +1032,13 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Page 7
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right">
                                     <?php
-                                    echo strftime("%A %d %B %Y");
-                                    echo '  ';
-                                    date_default_timezone_set('US/Pacific');
-                                    echo date('h:i:s a', time());
+                                    $todayDate
                                     ?>
                                 </td>
                             </tr>
@@ -1296,16 +1276,13 @@ if (isset($_GET['idI']) && isset($_GET['idP'])) {
                         <table>
                             <tr>
                                 <td style="font-size: 11px; text-align: right; width: 230px;">
-                                    Pag. 1
+                                    Page 8
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 11px; text-align: right">
                                     <?php
-                                    echo strftime("%A %d %B %Y");
-                                    echo '  ';
-                                    date_default_timezone_set('US/Pacific');
-                                    echo date('h:i:s a', time());
+                                    $todayDate
                                     ?>
                                 </td>
                             </tr>
